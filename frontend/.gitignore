@@ -1,0 +1,7 @@
+# Dependências e build
+node_modules
+dist
+dist-ssr
+
+# Arquivos locais do Vite (.env.local etc.)
+*.local
