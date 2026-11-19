@@ -65,6 +65,20 @@ npm run dev
 
 Acesse http://localhost:5173. Em desenvolvimento, o Vite repassa as requisições para `/api` ao backend em `localhost:8080`, então não é preciso configurar CORS.
 
+## Imagem de produção
+
+O `Dockerfile` na raiz gera uma imagem única: o build do frontend é servido pelo próprio Spring Boot, então SPA e `/api` ficam na mesma origem. A configuração vem por variáveis de ambiente (as mesmas do `backend/.env.example`).
+
+```bash
+docker build -t wib .
+docker run -p 8080:8080 \
+  -e DB_URL=jdbc:postgresql://<host>:5432/wib -e DB_USER=wib -e DB_PASSWORD=... \
+  -e PLUGGY_CLIENT_ID=... -e PLUGGY_CLIENT_SECRET=... \
+  wib
+```
+
+Health check: `GET /actuator/health`.
+
 ## Testes
 
 ```bash

@@ -1,0 +1,11 @@
+**/.env
+**/.env.*
+!**/.env.example
+.git
+.claude
+openspec
+**/node_modules
+**/dist
+**/target
+**/.idea
+**/.vscode
