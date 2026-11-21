@@ -17,11 +17,11 @@ WORKDIR /app/backend
 COPY backend/mvnw ./
 COPY backend/.mvn .mvn
 COPY backend/pom.xml ./
-RUN --mount=type=cache,target=/root/.m2 ./mvnw -B -q dependency:go-offline
+RUN ./mvnw -B -q dependency:go-offline
 COPY backend/src src
 COPY --from=frontend /app/frontend/dist src/main/resources/static
 # Os testes precisam do PostgreSQL no ar; eles rodam fora do build da imagem.
-RUN --mount=type=cache,target=/root/.m2 ./mvnw -B -q package -DskipTests \
+RUN ./mvnw -B -q package -DskipTests \
  && mv target/*.jar app.jar \
  && java -Djarmode=tools -jar app.jar extract --layers --launcher --destination extracted
 
